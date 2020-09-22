@@ -28,7 +28,7 @@
     "react-hooks/exhaustive-deps": "off",
     "prettier/prettier": "error",
     "import/no-cycle": "off",
-    "no-unused-vars": "off",
+    "no-unused-vars": "error",
     "no-param-reassign": "off",
     "class-methods-use-this": "off",
     "eqeqeq": "off",

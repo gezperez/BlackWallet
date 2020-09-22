@@ -1,19 +1,43 @@
-import React from "react";
-import { View, Text } from "react-native";
+import React, { useEffect } from "react";
+import { ScrollView } from "react-native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import Container from "../../Components/Container";
+import BottomButton from "../../Components/BottomButton";
+import { version } from "../../../package.json";
+import AppTitle from "./components/AppTitle";
+import { InitialStackParamsList } from "../../Navigator/InitialStack";
 
-const LoginScreen = () => {
+type LoginScreenNavigationProp = StackNavigationProp<
+	InitialStackParamsList,
+	"Login"
+>;
+
+type Props = {
+	navigation: LoginScreenNavigationProp;
+};
+
+const LoginScreen = ({ navigation }: Props) => {
+	const handleButton = () => navigation.navigate("Register");
+
+	useEffect(() => {
+		navigation.setParams({ title: version });
+	}, []);
+
 	return (
 		<Container>
-			<View
-				style={{
+			<ScrollView
+				contentContainerStyle={{
 					justifyContent: "space-between",
-					flex: 1,
+					flexGrow: 1,
 				}}
 			>
-				<Text>asd</Text>
-				<Text>asd</Text>
-			</View>
+				<AppTitle />
+				<BottomButton
+					label={"Continuar"}
+					onPress={() => handleButton()}
+					style={{ margin: 24 }}
+				/>
+			</ScrollView>
 		</Container>
 	);
 };

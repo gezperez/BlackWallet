@@ -2,30 +2,30 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import {
-	AppearanceProvider,
-	useColorScheme,
-	Appearance,
-} from "react-native-appearance";
-import HomeScreen from "../Screens/Home/HomeScreen";
-import LoginScreen from "../Screens/Login/LoginScreen";
-import { AppTheme, DarkTheme } from "../Themes/Theme";
+import { AppearanceProvider, useColorScheme } from "react-native-appearance";
+import { AppTheme, DarkTheme } from "../Utils/Theme";
+import InitialStack from "./InitialStack";
+import HomeStack from "./HomeStack";
+import { SlideUpAnimation } from "./NavigationUtils";
 
 const Stack = createStackNavigator();
-Appearance.getColorScheme();
 
 const Navigator = () => {
-	const scheme = useColorScheme() as String;
+	const scheme = useColorScheme();
+
 	return (
 		<AppearanceProvider>
 			<SafeAreaProvider>
 				<NavigationContainer theme={scheme === "dark" ? DarkTheme : AppTheme}>
 					<Stack.Navigator
-						initialRouteName="Login"
-						screenOptions={{ headerShown: false }}
+						initialRouteName="InitialStack"
+						screenOptions={{
+							headerShown: false,
+							...(SlideUpAnimation as any),
+						}}
 					>
-						<Stack.Screen name="Login" component={LoginScreen} />
-						<Stack.Screen name="Home" component={HomeScreen} />
+						<Stack.Screen name="InitialStack" component={InitialStack} />
+						<Stack.Screen name="HomeStack" component={HomeStack} />
 					</Stack.Navigator>
 				</NavigationContainer>
 			</SafeAreaProvider>
