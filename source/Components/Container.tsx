@@ -1,13 +1,22 @@
 import React, { ReactNode } from "react";
 import { useSafeArea } from "react-native-safe-area-context";
-import { View, StatusBar } from "react-native";
+import {
+	ScrollView,
+	Platform,
+	View,
+	StatusBar,
+	KeyboardAvoidingView,
+	TouchableWithoutFeedback,
+	Keyboard,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 
 type Props = {
 	children: ReactNode;
+	contentContainerStyle?: object;
 };
 
-const Container = ({ children }: Props) => {
+const Container = ({ children, contentContainerStyle }: Props) => {
 	const insets = useSafeArea();
 	const { colors, dark } = useTheme();
 	return (
@@ -15,15 +24,36 @@ const Container = ({ children }: Props) => {
 			style={{
 				paddingTop: insets.top,
 				paddingBottom: insets.bottom,
-				height: "100%",
+				flex: 1,
 			}}
 		>
-			<StatusBar
-				barStyle={dark ? "light-content" : "dark-content"}
-				backgroundColor={colors.background}
-			/>
+			<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+				<KeyboardAvoidingView
+					style={{
+						flex: 1,
+					}}
+					behavior={Platform.OS == "ios" ? "padding" : null}
+					keyboardVerticalOffset={100}
+				>
+					<ScrollView
+						contentContainerStyle={[
+							{
+								justifyContent: "space-between",
+								flexGrow: 1,
+							},
+							contentContainerStyle,
+						]}
+						keyboardShouldPersistTaps="always"
+					>
+						<StatusBar
+							barStyle={dark ? "light-content" : "dark-content"}
+							backgroundColor={colors.background}
+						/>
 
-			{children}
+						{children}
+					</ScrollView>
+				</KeyboardAvoidingView>
+			</TouchableWithoutFeedback>
 		</View>
 	);
 };

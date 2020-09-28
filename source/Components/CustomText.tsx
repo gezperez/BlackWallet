@@ -8,13 +8,13 @@ type Props = {
 	style?: object;
 	font?: string;
 	text: string;
-	size: number;
-	color: string;
+	size?: number;
+	color?: string;
 	bold?: boolean;
 	medium?: boolean;
 	semiBold?: boolean;
 	onPress?: () => void;
-	align: string;
+	align?: string;
 	lines?: number;
 	backgroundColor?: string;
 };
@@ -72,12 +72,10 @@ const CustomText = ({
 );
 
 CustomText.defaultProps = {
-	text: "",
 	hidden: false,
 	style: {},
 	font: "regular",
 	color: "black",
-	size: 16,
 	bold: false,
 	medium: false,
 	semiBold: false,

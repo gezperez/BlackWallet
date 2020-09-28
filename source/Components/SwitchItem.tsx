@@ -6,14 +6,15 @@ type Props = {
 	title: string;
 	active: boolean;
 	onToogle: () => void;
-	style: object;
+	style?: object;
 };
 
 const SwitchItem = ({ title, active, onToogle, style }: Props) => (
 	<ListItem
 		disabled={true}
 		title={title}
-		right={<Switch active={active} onToogle={() => onToogle()} style={style} />}
+		right={<Switch active={active} onToogle={() => onToogle()} />}
+		style={style}
 	/>
 );
 

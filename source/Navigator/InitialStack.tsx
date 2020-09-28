@@ -9,6 +9,7 @@ import { SlideUpAnimation } from "./NavigationUtils";
 type InitialStackParamsList = {
 	Login: { title: string };
 	Register: { title: string };
+	HomeStack: { screen: "Home" };
 };
 
 const Stack = createStackNavigator<InitialStackParamsList>();

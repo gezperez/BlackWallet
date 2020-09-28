@@ -1,19 +1,18 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import Animated from "react-native-reanimated";
+import { StyleSheet, View } from "react-native";
 
 import WalletCard from "../../../Components/WalletCard";
 
 const styles = StyleSheet.create({
 	container: {
-		marginHorizontal: 16,
+		alignSelf: "center",
 	},
 });
 
 const AppTitle = () => (
-	<Animated.View style={styles.container}>
+	<View style={styles.container}>
 		<WalletCard />
-	</Animated.View>
+	</View>
 );
 
 export default AppTitle;

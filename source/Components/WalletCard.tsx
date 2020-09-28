@@ -1,19 +1,24 @@
-import React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { View, StyleSheet, Animated } from "react-native";
 import { times } from "lodash";
 import LinearGradient from "react-native-linear-gradient";
+import {
+	widthPercentageToDP as wp,
+	heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import CustomText from "./CustomText";
 import Colors from "../Utils/Colors";
+import FadeInSlideUpView from "../AnimatedContainers/FadeInSlideUpView";
+import Dot from "./Dot";
 
 const numberDots = times(12);
-const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
 	container: {
 		justifyContent: "flex-end",
 		alignItems: "flex-end",
-		height: 200,
-		width: width - 32,
+		height: hp("22%"),
+		width: wp("92%"),
 		borderRadius: 16,
 	},
 	numberContainer: {
@@ -26,10 +31,6 @@ const styles = StyleSheet.create({
 		justifyContent: "flex-start",
 		alignItems: "center",
 	},
-	dot: {
-		borderRadius: 16,
-		backgroundColor: "white",
-	},
 	logoDot: {
 		position: "absolute",
 		width: 40,
@@ -38,15 +39,20 @@ const styles = StyleSheet.create({
 	},
 });
 
-type DotProps = {
-	style: object;
+const config = {
+	duration: 1500,
+	useNativeDriver: true,
 };
 
-const Dot = ({ style }: DotProps) => <View style={[styles.dot, style]} />;
-
 const WalletCard = () => {
+	const translateY = useRef(new Animated.Value(300)).current;
+
+	useEffect(() => {
+		Animated.timing(translateY, { ...config, toValue: 0 }).start();
+	}, []);
+
 	return (
-		<View>
+		<FadeInSlideUpView>
 			<LinearGradient
 				start={{ x: 0, y: 0 }}
 				end={{ x: 1, y: 0 }}
@@ -69,23 +75,25 @@ const WalletCard = () => {
 				<Dot style={[styles.logoDot, { left: 64 }]} />
 				<Dot style={[styles.logoDot, { bottom: 72, width: 60, left: 16 }]} />
 				<Dot style={[styles.logoDot, { bottom: 72, width: 60, left: 88 }]} />
-				<CustomText
-					bold={true}
-					text={"Black"}
+				<Animated.View
 					style={{
 						marginRight: 16,
+						transform: [{ translateY }],
 					}}
-					size={40}
-				/>
-				<CustomText
-					bold={true}
-					text={"Wallet"}
-					color={"white"}
-					style={{ marginRight: 16, marginBottom: 8 }}
-					size={40}
-				/>
+				>
+					<CustomText bold={true} text={"Black"} size={40} />
+				</Animated.View>
+				<Animated.View
+					style={{
+						marginRight: 16,
+						marginBottom: 8,
+						transform: [{ translateY }],
+					}}
+				>
+					<CustomText bold={true} text={"Wallet"} color={"white"} size={40} />
+				</Animated.View>
 			</LinearGradient>
-		</View>
+		</FadeInSlideUpView>
 	);
 };
 

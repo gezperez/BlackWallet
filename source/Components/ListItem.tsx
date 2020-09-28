@@ -3,10 +3,11 @@ import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import CustomText from "./CustomText";
 import Fonts from "../Utils/Fonts";
+import FadeInSlideUpView from "../AnimatedContainers/FadeInSlideUpView";
 
 const styles = StyleSheet.create({
 	container: {
-		alignItems: "stretch",
+		alignSelf: "center",
 		flexDirection: "row",
 		width: "90%",
 	},
@@ -42,29 +43,31 @@ const ListItem = ({
 }: ListItemProps) => {
 	const { dark } = useTheme();
 	return (
-		<TouchableOpacity disabled={disabled} onPress={() => onPress()}>
-			<View style={[styles.container, style]}>
-				<View style={{ justifyContent: "center" }}>{left}</View>
-				<View style={styles.textContainer}>
-					<CustomText
-						semiBold={true}
-						text={title}
-						size={Fonts.small}
-						style={titleStyle}
-						color={dark ? "white" : "black"}
-					/>
-					{subtitle && (
+		<FadeInSlideUpView>
+			<TouchableOpacity disabled={disabled} onPress={() => onPress()}>
+				<View style={[styles.container, style]}>
+					<View style={{ justifyContent: "center" }}>{left}</View>
+					<View style={styles.textContainer}>
 						<CustomText
-							text={subtitle}
+							semiBold={true}
+							text={title}
 							size={Fonts.small}
-							style={subtitleStyle}
+							style={titleStyle}
 							color={dark ? "white" : "black"}
 						/>
-					)}
+						{subtitle && (
+							<CustomText
+								text={subtitle}
+								size={Fonts.small}
+								style={subtitleStyle}
+								color={dark ? "white" : "black"}
+							/>
+						)}
+					</View>
+					<View style={{ justifyContent: "center" }}>{right}</View>
 				</View>
-				<View style={{ justifyContent: "center" }}>{right}</View>
-			</View>
-		</TouchableOpacity>
+			</TouchableOpacity>
+		</FadeInSlideUpView>
 	);
 };
 

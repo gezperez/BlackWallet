@@ -16,4 +16,6 @@ const HomeStack = () => {
 	);
 };
 
+export { HomeStackParamsList };
+
 export default HomeStack;
