@@ -1,6 +1,7 @@
 import React from "react";
 import { noop } from "lodash";
 import { ListItem, Switch } from ".";
+import FadeInSlideUpView from "../AnimatedContainers/FadeInSlideUpView";
 
 type Props = {
 	title: string;
@@ -10,12 +11,14 @@ type Props = {
 };
 
 const SwitchItem = ({ title, active, onToogle, style }: Props) => (
-	<ListItem
-		disabled={true}
-		title={title}
-		right={<Switch active={active} onToogle={() => onToogle()} />}
-		style={style}
-	/>
+	<FadeInSlideUpView>
+		<ListItem
+			disabled={true}
+			title={title}
+			right={<Switch active={active} onToogle={() => onToogle()} />}
+			style={style}
+		/>
+	</FadeInSlideUpView>
 );
 
 SwitchItem.defaultProps = {

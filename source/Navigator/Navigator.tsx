@@ -6,7 +6,7 @@ import { AppearanceProvider, useColorScheme } from "react-native-appearance";
 import { AppTheme, DarkTheme } from "../Utils/Theme";
 import InitialStack from "./InitialStack";
 import HomeStack from "./HomeStack";
-import { SlideUpAnimation } from "./NavigationUtils";
+import SlideUpAnimation from "./NavigationUtils";
 
 const Stack = createStackNavigator();
 

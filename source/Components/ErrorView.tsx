@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { LayoutAnimation, Platform, StyleSheet, View } from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 import CustomText from "./CustomText";
 import { Colors, Fonts } from "../Utils";
+import SpringView from "../AnimatedContainers/SpringView";
 
 const style = StyleSheet.create({
 	container: {
@@ -12,31 +13,16 @@ const style = StyleSheet.create({
 });
 
 const ErrorView = ({ text }) => {
-	const [expanded, setExpanded] = useState(false);
-
-	useEffect(() => {
-		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-		if (text) {
-			setExpanded(true);
-		} else {
-			setExpanded(false);
-		}
-	}, [text]);
-
 	return (
-		<>
-			{expanded && (
-				<View style={style.container}>
-					<CustomText
-						align="center"
-						text={text}
-						color={Colors.error}
-						size={Fonts.small}
-						semiBold={true}
-					/>
-				</View>
-			)}
-		</>
+		<SpringView show={text} style={style.container}>
+			<CustomText
+				align="center"
+				text={text}
+				color={Colors.error}
+				size={Fonts.small}
+				semiBold={true}
+			/>
+		</SpringView>
 	);
 };
 

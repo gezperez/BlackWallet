@@ -1,8 +1,9 @@
 import "react-native-gesture-handler";
 import React from "react";
-
 import { Platform, UIManager } from "react-native";
+import { Provider } from "react-redux";
 import Navigator from "./source/Navigator/Navigator";
+import configureStore from "./source/store/store";
 
 if (
 	Platform.OS === "android" &&
@@ -12,7 +13,11 @@ if (
 }
 
 const App = () => {
-	return <Navigator />;
+	return (
+		<Provider store={configureStore}>
+			<Navigator />
+		</Provider>
+	);
 };
 
 export default App;

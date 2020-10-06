@@ -45,4 +45,4 @@ const SlideUpAnimation = {
 	},
 };
 
-export { SlideUpAnimation };
+export default SlideUpAnimation;

@@ -7,7 +7,7 @@ type Props = {
 	hidden?: boolean;
 	style?: object;
 	font?: string;
-	text: string;
+	text: string | number;
 	size?: number;
 	color?: string;
 	bold?: boolean;

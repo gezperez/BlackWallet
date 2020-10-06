@@ -10,6 +10,9 @@ import WalletCard from "./WalletCard";
 import CustomInput from "./CustomInput";
 import ErrorView from "./ErrorView";
 import Dot from "./Dot";
+import CustomFlatList from "./CustomFlatList";
+import ProgressLoader from "./ProgressLoader";
+import ArrowWithText from "./ArrowWithText";
 
 export {
 	BottomButton,
@@ -24,4 +27,7 @@ export {
 	WalletCard,
 	ErrorView,
 	Dot,
+	CustomFlatList,
+	ProgressLoader,
+	ArrowWithText,
 };

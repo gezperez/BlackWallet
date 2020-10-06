@@ -3,4 +3,5 @@ export default {
 	smallMedium: 16,
 	medium: 18,
 	bigMedium: 20,
+	big: 24,
 };

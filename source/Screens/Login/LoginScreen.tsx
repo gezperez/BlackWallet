@@ -56,12 +56,12 @@ const LoginScreen = ({ navigation }: Props) => {
 	};
 
 	const handleButton = () => {
-		if (validateUser() && validatePassword()) {
-			navigation.reset({
-				index: 0,
-				routes: [{ name: "HomeStack" }],
-			});
-		}
+		// if (validateUser() && validatePassword()) {
+		// }
+		navigation.reset({
+			index: 0,
+			routes: [{ name: "HomeStack" }],
+		});
 	};
 
 	useEffect(() => {

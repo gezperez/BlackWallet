@@ -6,14 +6,26 @@ import Fonts from "../Utils/Fonts";
 import CustomText from "../Components/CustomText";
 import Colors from "../Utils/Colors";
 import { InitialStackParamsList } from "./InitialStack";
+import { HomeStackParamsList } from "./HomeStack";
 
-type ProfileScreenRouteProp = RouteProp<
+type InitialScreenRouteProp = RouteProp<
 	InitialStackParamsList,
 	"Login" | "Register"
 >;
 
-type Props = {
-	route: ProfileScreenRouteProp;
+type DetailScreenRouteProp = RouteProp<HomeStackParamsList, "Detail">;
+
+type DetailProps = {
+	route: DetailScreenRouteProp;
+	dark: boolean;
+};
+
+type InitialProps = {
+	route: InitialScreenRouteProp;
+	dark: boolean;
+};
+
+type HomeProps = {
 	dark: boolean;
 };
 
@@ -32,7 +44,24 @@ const Title = (title, dark) => (
 	/>
 );
 
-const LoginHeader = ({ route, dark }: Props) => {
+const HomeTitle = (dark) => (
+	<CustomText
+		semiBold={true}
+		text=""
+		color={dark ? "white" : "black"}
+		size={Fonts.medium}
+	>
+		{"Black "}
+		<CustomText
+			semiBold={true}
+			text={"Wallet"}
+			color={Colors.pink}
+			size={Fonts.medium}
+		/>
+	</CustomText>
+);
+
+const LoginHeader = ({ route, dark }: InitialProps) => {
 	return {
 		headerBackTitle: " ",
 		headerTitleAlign: "center" as "center",
@@ -47,7 +76,22 @@ const LoginHeader = ({ route, dark }: Props) => {
 	};
 };
 
-const HomeHeader = ({ dark }: Props) => {
+const DetailHeader = ({ route, dark }: DetailProps) => {
+	return {
+		headerBackTitle: " ",
+		headerTitleAlign: "center" as "center",
+		headerStyle: {
+			backgroundColor: dark ? "black" : "white",
+			elevation: 0,
+			borderBottomWidth: 2,
+			shadowOpacity: 0,
+		},
+		headerBackImage: () => BackIcon(),
+		headerTitle: () => Title(route?.params?.title, dark),
+	};
+};
+
+const HomeHeader = ({ dark }: HomeProps) => {
 	return {
 		headerStyle: {
 			backgroundColor: dark ? "black" : "white",
@@ -55,8 +99,8 @@ const HomeHeader = ({ dark }: Props) => {
 			borderBottomWidth: 0,
 			shadowOpacity: 0,
 		},
-		headerTitle: () => {},
+		headerTitle: () => HomeTitle(dark),
 	};
 };
 
-export { LoginHeader, HomeHeader };
+export { LoginHeader, HomeHeader, DetailHeader };

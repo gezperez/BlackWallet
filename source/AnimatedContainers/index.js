@@ -1,3 +1,4 @@
 import FadeInSlideUpView from "./FadeInSlideUpView";
+import SpringView from "./SpringView";
 
-export default { FadeInSlideUpView };
+export { FadeInSlideUpView, SpringView };

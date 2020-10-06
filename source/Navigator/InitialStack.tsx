@@ -4,7 +4,7 @@ import { useTheme } from "@react-navigation/native";
 import LoginScreen from "../Screens/Login/LoginScreen";
 import { LoginHeader } from "./Headers";
 import RegisterScreen from "../Screens/Register/RegisterScreen";
-import { SlideUpAnimation } from "./NavigationUtils";
+import SlideUpAnimation from "./NavigationUtils";
 
 type InitialStackParamsList = {
 	Login: { title: string };

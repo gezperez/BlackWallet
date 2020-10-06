@@ -14,15 +14,18 @@ import { useTheme } from "@react-navigation/native";
 type Props = {
 	children: ReactNode;
 	contentContainerStyle?: object;
+	scrollable?: boolean;
 };
 
-const Container = ({ children, contentContainerStyle }: Props) => {
+const Container = ({ children, contentContainerStyle, scrollable }: Props) => {
 	const insets = useSafeArea();
 	const { colors, dark } = useTheme();
+
+	const Component = scrollable ? ScrollView : View;
+
 	return (
 		<View
 			style={{
-				paddingTop: insets.top,
 				paddingBottom: insets.bottom,
 				flex: 1,
 			}}
@@ -33,9 +36,8 @@ const Container = ({ children, contentContainerStyle }: Props) => {
 						flex: 1,
 					}}
 					behavior={Platform.OS == "ios" ? "padding" : null}
-					keyboardVerticalOffset={100}
 				>
-					<ScrollView
+					<Component
 						contentContainerStyle={[
 							{
 								justifyContent: "space-between",
@@ -51,10 +53,15 @@ const Container = ({ children, contentContainerStyle }: Props) => {
 						/>
 
 						{children}
-					</ScrollView>
+					</Component>
 				</KeyboardAvoidingView>
 			</TouchableWithoutFeedback>
 		</View>
 	);
 };
+
+Container.defaultProps = {
+	scrollable: true,
+};
+
 export default Container;

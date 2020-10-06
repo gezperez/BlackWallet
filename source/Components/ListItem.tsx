@@ -43,31 +43,29 @@ const ListItem = ({
 }: ListItemProps) => {
 	const { dark } = useTheme();
 	return (
-		<FadeInSlideUpView>
-			<TouchableOpacity disabled={disabled} onPress={() => onPress()}>
-				<View style={[styles.container, style]}>
-					<View style={{ justifyContent: "center" }}>{left}</View>
-					<View style={styles.textContainer}>
+		<TouchableOpacity disabled={disabled} onPress={() => onPress()}>
+			<View style={[styles.container, style]}>
+				<View style={{ justifyContent: "center" }}>{left}</View>
+				<View style={styles.textContainer}>
+					<CustomText
+						semiBold={true}
+						text={title}
+						size={Fonts.small}
+						style={titleStyle}
+						color={dark ? "white" : "black"}
+					/>
+					{subtitle && (
 						<CustomText
-							semiBold={true}
-							text={title}
+							text={subtitle}
 							size={Fonts.small}
-							style={titleStyle}
+							style={subtitleStyle}
 							color={dark ? "white" : "black"}
 						/>
-						{subtitle && (
-							<CustomText
-								text={subtitle}
-								size={Fonts.small}
-								style={subtitleStyle}
-								color={dark ? "white" : "black"}
-							/>
-						)}
-					</View>
-					<View style={{ justifyContent: "center" }}>{right}</View>
+					)}
 				</View>
-			</TouchableOpacity>
-		</FadeInSlideUpView>
+				<View style={{ justifyContent: "center" }}>{right}</View>
+			</View>
+		</TouchableOpacity>
 	);
 };
 
